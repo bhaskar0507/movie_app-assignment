@@ -1,0 +1,702 @@
+---
+The server generated these startup warnings when booting:
+        2021-08-17T19:37:40.970+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+---
+---
+        Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+        metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+
+        The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+        and anyone you share the URL with. MongoDB may use this information to make product
+        improvements and to suggest MongoDB products and deployment options to you.
+
+        To enable free monitoring, run the following command: db.enableFreeMonitoring()
+        To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+---
+> show dbs
+admin       0.000GB
+config      0.000GB
+local       0.000GB
+movie_app   0.000GB
+we_session  0.000GB
+> use movie_app
+switched to db movie_app
+>
+> db.movie_app.find({"movie_name":{$eq:"thor"}}, )
+>  db.movie_app.find({"movie_name":{$eq:"thor"}},{"movie_name":1,"production_year:1","_id":0}).pretty()
+uncaught exception: SyntaxError: missing : after property id :
+@(shell):1:81
+> db.movies.find({movie_name:{$eq:"American Promise"}}, {"movie_name:1", "production_year":1,"_id":0}).pretty()
+uncaught exception: SyntaxError: missing : after property id :
+@(shell):1:69
+>  db.movie_app.find({movie_name:{$eq:"American Promise"}}, {"movie_name:1", "production_year":1,"_id":0}).pretty()
+uncaught exception: SyntaxError: missing : after property id :
+@(shell):1:72
+> db.movies.find({"movie_name":{$eq:"American Promise"}}).pretty()
+{
+        "_id" : ObjectId("611bffcbd3457503a04302f0"),
+        "id" : 17,
+        "movie_name" : "American Promise",
+        "movie_genre" : "Documentary",
+        "production_year" : 2015,
+        "budget" : 19342
+}
+>  db.movies.find({"movie_name":{$eq:"American Promise"}},{"movie_name":1, "production_year":1, "_id":0}).pretty()
+{ "movie_name" : "American Promise", "production_year" : 2015 }
+>
+>
+> db.movies.find({movie_name:{$neq:"Bob Funk}},{"movie_name":1, "production_year":1, "_id":0}).pretty()
+uncaught exception: SyntaxError: missing } after property list :
+@(shell):1:47
+> db.movies.find({movie_name:{$neq:"Bob Funk"}},{"movie_name":1, "production_year":1, "_id":0}).pretty()
+Error: error: {
+        "ok" : 0,
+        "errmsg" : "unknown operator: $neq",
+        "code" : 2,
+        "codeName" : "BadValue"
+}
+>  db.movies.find({movie_name:{$ne:"Bob Funk"}},{"movie_name":1, "production_year":1, "_id":0}).pretty()
+{ "movie_name" : "Traces of Red", "production_year" : 2006 }
+{ "movie_name" : "Midnight Bayou", "production_year" : 2000 }
+{ "movie_name" : "Two Weeks Notice", "production_year" : 2019 }
+{ "movie_name" : "Golden Child, The", "production_year" : 2010 }
+{ "movie_name" : "Angel Levine, The", "production_year" : 1993 }
+{ "movie_name" : "Elstree Calling", "production_year" : 1994 }
+{ "movie_name" : "The Gamma People", "production_year" : 2020 }
+{
+        "movie_name" : "Saturday Night and Sunday Morning",
+        "production_year" : 2001
+}
+{ "movie_name" : "Kikujiro (Kikujirô no natsu)", "production_year" : 2014 }
+{ "movie_name" : "Demoted", "production_year" : 2019 }
+{ "movie_name" : "Three (Tri)", "production_year" : 2004 }
+{ "movie_name" : "Odgrobadogroba", "production_year" : 2007 }
+{ "movie_name" : "Little Rascals, The", "production_year" : 2005 }
+{ "movie_name" : "Daisies (Sedmikrasky)", "production_year" : 2014 }
+{ "movie_name" : "Set Me Free (Emporte-moi)", "production_year" : 2004 }
+{ "movie_name" : "Bourne Identity, The", "production_year" : 2020 }
+{ "movie_name" : "American Promise", "production_year" : 2015 }
+{ "movie_name" : "Little Manhattan", "production_year" : 2014 }
+{ "movie_name" : "Sleeping Car, The", "production_year" : 2006 }
+{ "movie_name" : "Take My Eyes (Te doy mis ojos)", "production_year" : 2020 }
+Type "it" for more
+> db.movies.find({"budget":{$gte:10000}},{"movie_name":1, "production_year":1,"_id":0}).pretty()
+{ "movie_name" : "Traces of Red", "production_year" : 2006 }
+{ "movie_name" : "Midnight Bayou", "production_year" : 2000 }
+{ "movie_name" : "Two Weeks Notice", "production_year" : 2019 }
+{ "movie_name" : "Elstree Calling", "production_year" : 1994 }
+{ "movie_name" : "The Gamma People", "production_year" : 2020 }
+{
+        "movie_name" : "Saturday Night and Sunday Morning",
+        "production_year" : 2001
+}
+{ "movie_name" : "Kikujiro (Kikujirô no natsu)", "production_year" : 2014 }
+{ "movie_name" : "Three (Tri)", "production_year" : 2004 }
+{ "movie_name" : "Odgrobadogroba", "production_year" : 2007 }
+{ "movie_name" : "Little Rascals, The", "production_year" : 2005 }
+{ "movie_name" : "Daisies (Sedmikrasky)", "production_year" : 2014 }
+{ "movie_name" : "Set Me Free (Emporte-moi)", "production_year" : 2004 }
+{ "movie_name" : "Bourne Identity, The", "production_year" : 2020 }
+{ "movie_name" : "American Promise", "production_year" : 2015 }
+{ "movie_name" : "Little Manhattan", "production_year" : 2014 }
+{ "movie_name" : "Sleeping Car, The", "production_year" : 2006 }
+{ "movie_name" : "Take My Eyes (Te doy mis ojos)", "production_year" : 2020 }
+{ "movie_name" : "Phantom Pain", "production_year" : 2007 }
+{ "movie_name" : "Billy Blazes, Esq.", "production_year" : 2001 }
+{ "movie_name" : "Konga", "production_year" : 2005 }
+Type "it" for more
+>  db.movies.find({"budget":{$gte:10000}},{"movie_name":1, "production_year":1,"_id":0,"budget":1}).pretty()
+{
+        "movie_name" : "Traces of Red",
+        "production_year" : 2006,
+        "budget" : 10128
+}
+{
+        "movie_name" : "Midnight Bayou",
+        "production_year" : 2000,
+        "budget" : 18702
+}
+{
+        "movie_name" : "Two Weeks Notice",
+        "production_year" : 2019,
+        "budget" : 17722
+}
+{
+        "movie_name" : "Elstree Calling",
+        "production_year" : 1994,
+        "budget" : 16258
+}
+{
+        "movie_name" : "The Gamma People",
+        "production_year" : 2020,
+        "budget" : 12830
+}
+{
+        "movie_name" : "Saturday Night and Sunday Morning",
+        "production_year" : 2001,
+        "budget" : 18977
+}
+{
+        "movie_name" : "Kikujiro (Kikujirô no natsu)",
+        "production_year" : 2014,
+        "budget" : 19863
+}
+{ "movie_name" : "Three (Tri)", "production_year" : 2004, "budget" : 13900 }
+{
+        "movie_name" : "Odgrobadogroba",
+        "production_year" : 2007,
+        "budget" : 19991
+}
+{
+        "movie_name" : "Little Rascals, The",
+        "production_year" : 2005,
+        "budget" : 15543
+}
+{
+        "movie_name" : "Daisies (Sedmikrasky)",
+        "production_year" : 2014,
+        "budget" : 15676
+}
+{
+        "movie_name" : "Set Me Free (Emporte-moi)",
+        "production_year" : 2004,
+        "budget" : 11182
+}
+{
+        "movie_name" : "Bourne Identity, The",
+        "production_year" : 2020,
+        "budget" : 19637
+}
+{
+        "movie_name" : "American Promise",
+        "production_year" : 2015,
+        "budget" : 19342
+}
+{
+        "movie_name" : "Little Manhattan",
+        "production_year" : 2014,
+        "budget" : 19751
+}
+{
+        "movie_name" : "Sleeping Car, The",
+        "production_year" : 2006,
+        "budget" : 12325
+}
+{
+        "movie_name" : "Take My Eyes (Te doy mis ojos)",
+        "production_year" : 2020,
+        "budget" : 18891
+}
+{
+        "movie_name" : "Phantom Pain",
+        "production_year" : 2007,
+        "budget" : 10510
+}
+{
+        "movie_name" : "Billy Blazes, Esq.",
+        "production_year" : 2001,
+        "budget" : 12383
+}
+{ "movie_name" : "Konga", "production_year" : 2005, "budget" : 15687 }
+Type "it" for more
+>   db.movies.find({"budget":{$gte:10510}},{"movie_name":1, "production_year":1,"_id":0,"budget":1}).pretty()
+{
+        "movie_name" : "Midnight Bayou",
+        "production_year" : 2000,
+        "budget" : 18702
+}
+{
+        "movie_name" : "Two Weeks Notice",
+        "production_year" : 2019,
+        "budget" : 17722
+}
+{
+        "movie_name" : "Elstree Calling",
+        "production_year" : 1994,
+        "budget" : 16258
+}
+{
+        "movie_name" : "The Gamma People",
+        "production_year" : 2020,
+        "budget" : 12830
+}
+{
+        "movie_name" : "Saturday Night and Sunday Morning",
+        "production_year" : 2001,
+        "budget" : 18977
+}
+{
+        "movie_name" : "Kikujiro (Kikujirô no natsu)",
+        "production_year" : 2014,
+        "budget" : 19863
+}
+{ "movie_name" : "Three (Tri)", "production_year" : 2004, "budget" : 13900 }
+{
+        "movie_name" : "Odgrobadogroba",
+        "production_year" : 2007,
+        "budget" : 19991
+}
+{
+        "movie_name" : "Little Rascals, The",
+        "production_year" : 2005,
+        "budget" : 15543
+}
+{
+        "movie_name" : "Daisies (Sedmikrasky)",
+        "production_year" : 2014,
+        "budget" : 15676
+}
+{
+        "movie_name" : "Set Me Free (Emporte-moi)",
+        "production_year" : 2004,
+        "budget" : 11182
+}
+{
+        "movie_name" : "Bourne Identity, The",
+        "production_year" : 2020,
+        "budget" : 19637
+}
+{
+        "movie_name" : "American Promise",
+        "production_year" : 2015,
+        "budget" : 19342
+}
+{
+        "movie_name" : "Little Manhattan",
+        "production_year" : 2014,
+        "budget" : 19751
+}
+{
+        "movie_name" : "Sleeping Car, The",
+        "production_year" : 2006,
+        "budget" : 12325
+}
+{
+        "movie_name" : "Take My Eyes (Te doy mis ojos)",
+        "production_year" : 2020,
+        "budget" : 18891
+}
+{
+        "movie_name" : "Phantom Pain",
+        "production_year" : 2007,
+        "budget" : 10510
+}
+{
+        "movie_name" : "Billy Blazes, Esq.",
+        "production_year" : 2001,
+        "budget" : 12383
+}
+{ "movie_name" : "Konga", "production_year" : 2005, "budget" : 15687 }
+{
+        "movie_name" : "Christmas in Conway",
+        "production_year" : 2020,
+        "budget" : 15898
+}
+Type "it" for more
+>   db.movies.find({"budget":{$lte:10000}},{"movie_name":1, "production_year":1,"_id":0,"budget":1}).pretty()
+{
+        "movie_name" : "Golden Child, The",
+        "production_year" : 2010,
+        "budget" : 9138
+}
+{
+        "movie_name" : "Angel Levine, The",
+        "production_year" : 1993,
+        "budget" : 9951
+}
+{ "movie_name" : "Demoted", "production_year" : 2019, "budget" : 9553 }
+{
+        "movie_name" : "Daria: Is It Fall Yet?",
+        "production_year" : 1990,
+        "budget" : 9912
+}
+{ "movie_name" : "Lucky", "production_year" : 1997, "budget" : 9701 }
+{
+        "movie_name" : "Cinderella III: A Twist in Time",
+        "production_year" : 2015,
+        "budget" : 9314
+}
+{
+        "movie_name" : "The Retrieval",
+        "production_year" : 2012,
+        "budget" : 9924
+}
+{
+        "movie_name" : "Somebody is Waiting",
+        "production_year" : 2020,
+        "budget" : 9670
+}
+{ "movie_name" : "Local Color", "production_year" : 2013, "budget" : 9056 }
+{
+        "movie_name" : "Pallbearer, The",
+        "production_year" : 2016,
+        "budget" : 9186
+}
+{
+        "movie_name" : "How to Train Your Dragon",
+        "production_year" : 2005,
+        "budget" : 9936
+}
+{ "movie_name" : "Rendez-vous", "production_year" : 2019, "budget" : 9089 }
+{ "movie_name" : "Congorama", "production_year" : 2015, "budget" : 9475 }
+{
+        "movie_name" : "Me You Them (Eu, Tu, Eles)",
+        "production_year" : 2001,
+        "budget" : 9019
+}
+{
+        "movie_name" : "Born into Brothels",
+        "production_year" : 1991,
+        "budget" : 9042
+}
+{
+        "movie_name" : "Miracle on 34th Street",
+        "production_year" : 1999,
+        "budget" : 9498
+}
+{ "movie_name" : "Planet Ocean", "production_year" : 2018, "budget" : 9840 }
+{
+        "movie_name" : "Green Dolphin Street",
+        "production_year" : 2016,
+        "budget" : 9993
+}
+{
+        "movie_name" : "House of the Spirits, The",
+        "production_year" : 2001,
+        "budget" : 9039
+}
+{ "movie_name" : "In the Loop", "production_year" : 1998, "budget" : 9828 }
+Type "it" for more
+> db.movies.find({$and:["production_year":{$gt:2000},"budget":{$gt:10000}]},{"movie_name":1, "production_year":1, "_id":0}).pretty()
+uncaught exception: SyntaxError: missing ] after element list :
+@(shell):1:39
+>  db.movies.find({$and:[{"production_year":{$gt:2000}},{"budget":{$gt:10000}}]},{"movie_name":1, "production_year":1, "_id":0}).pretty()
+{ "movie_name" : "Traces of Red", "production_year" : 2006 }
+{ "movie_name" : "Two Weeks Notice", "production_year" : 2019 }
+{ "movie_name" : "The Gamma People", "production_year" : 2020 }
+{
+        "movie_name" : "Saturday Night and Sunday Morning",
+        "production_year" : 2001
+}
+{ "movie_name" : "Kikujiro (Kikujirô no natsu)", "production_year" : 2014 }
+{ "movie_name" : "Three (Tri)", "production_year" : 2004 }
+{ "movie_name" : "Odgrobadogroba", "production_year" : 2007 }
+{ "movie_name" : "Little Rascals, The", "production_year" : 2005 }
+{ "movie_name" : "Daisies (Sedmikrasky)", "production_year" : 2014 }
+{ "movie_name" : "Set Me Free (Emporte-moi)", "production_year" : 2004 }
+{ "movie_name" : "Bourne Identity, The", "production_year" : 2020 }
+{ "movie_name" : "American Promise", "production_year" : 2015 }
+{ "movie_name" : "Little Manhattan", "production_year" : 2014 }
+{ "movie_name" : "Sleeping Car, The", "production_year" : 2006 }
+{ "movie_name" : "Take My Eyes (Te doy mis ojos)", "production_year" : 2020 }
+{ "movie_name" : "Phantom Pain", "production_year" : 2007 }
+{ "movie_name" : "Billy Blazes, Esq.", "production_year" : 2001 }
+{ "movie_name" : "Konga", "production_year" : 2005 }
+{ "movie_name" : "Christmas in Conway", "production_year" : 2020 }
+{ "movie_name" : "Beyond the Black Rainbow", "production_year" : 2004 }
+Type "it" for more
+>  db.movies.find({$and:[{"production_year":{$gt:2000}},{"budget":{$gt:10000}}]},{"movie_name":1, "production_year":1, "_id":0,"budget":1}).pretty()
+{
+        "movie_name" : "Traces of Red",
+        "production_year" : 2006,
+        "budget" : 10128
+}
+{
+        "movie_name" : "Two Weeks Notice",
+        "production_year" : 2019,
+        "budget" : 17722
+}
+{
+        "movie_name" : "The Gamma People",
+        "production_year" : 2020,
+        "budget" : 12830
+}
+{
+        "movie_name" : "Saturday Night and Sunday Morning",
+        "production_year" : 2001,
+        "budget" : 18977
+}
+{
+        "movie_name" : "Kikujiro (Kikujirô no natsu)",
+        "production_year" : 2014,
+        "budget" : 19863
+}
+{ "movie_name" : "Three (Tri)", "production_year" : 2004, "budget" : 13900 }
+{
+        "movie_name" : "Odgrobadogroba",
+        "production_year" : 2007,
+        "budget" : 19991
+}
+{
+        "movie_name" : "Little Rascals, The",
+        "production_year" : 2005,
+        "budget" : 15543
+}
+{
+        "movie_name" : "Daisies (Sedmikrasky)",
+        "production_year" : 2014,
+        "budget" : 15676
+}
+{
+        "movie_name" : "Set Me Free (Emporte-moi)",
+        "production_year" : 2004,
+        "budget" : 11182
+}
+{
+        "movie_name" : "Bourne Identity, The",
+        "production_year" : 2020,
+        "budget" : 19637
+}
+{
+        "movie_name" : "American Promise",
+        "production_year" : 2015,
+        "budget" : 19342
+}
+{
+        "movie_name" : "Little Manhattan",
+        "production_year" : 2014,
+        "budget" : 19751
+}
+{
+        "movie_name" : "Sleeping Car, The",
+        "production_year" : 2006,
+        "budget" : 12325
+}
+{
+        "movie_name" : "Take My Eyes (Te doy mis ojos)",
+        "production_year" : 2020,
+        "budget" : 18891
+}
+{
+        "movie_name" : "Phantom Pain",
+        "production_year" : 2007,
+        "budget" : 10510
+}
+{
+        "movie_name" : "Billy Blazes, Esq.",
+        "production_year" : 2001,
+        "budget" : 12383
+}
+{ "movie_name" : "Konga", "production_year" : 2005, "budget" : 15687 }
+{
+        "movie_name" : "Christmas in Conway",
+        "production_year" : 2020,
+        "budget" : 15898
+}
+{
+        "movie_name" : "Beyond the Black Rainbow",
+        "production_year" : 2004,
+        "budget" : 13287
+}
+Type "it" for more
+> db.movies.find({$or:[{"production_year":{$gt:2000}},{"budget":{$gt:10000}}]},{"movie_name":1, "production_year":1, "_id":0,"budget":1}).pretty()
+{
+        "movie_name" : "Traces of Red",
+        "production_year" : 2006,
+        "budget" : 10128
+}
+{
+        "movie_name" : "Midnight Bayou",
+        "production_year" : 2000,
+        "budget" : 18702
+}
+{
+        "movie_name" : "Two Weeks Notice",
+        "production_year" : 2019,
+        "budget" : 17722
+}
+{
+        "movie_name" : "Golden Child, The",
+        "production_year" : 2010,
+        "budget" : 9138
+}
+{
+        "movie_name" : "Elstree Calling",
+        "production_year" : 1994,
+        "budget" : 16258
+}
+{
+        "movie_name" : "The Gamma People",
+        "production_year" : 2020,
+        "budget" : 12830
+}
+{
+        "movie_name" : "Saturday Night and Sunday Morning",
+        "production_year" : 2001,
+        "budget" : 18977
+}
+{
+        "movie_name" : "Kikujiro (Kikujirô no natsu)",
+        "production_year" : 2014,
+        "budget" : 19863
+}
+{ "movie_name" : "Demoted", "production_year" : 2019, "budget" : 9553 }
+{ "movie_name" : "Three (Tri)", "production_year" : 2004, "budget" : 13900 }
+{
+        "movie_name" : "Odgrobadogroba",
+        "production_year" : 2007,
+        "budget" : 19991
+}
+{
+        "movie_name" : "Little Rascals, The",
+        "production_year" : 2005,
+        "budget" : 15543
+}
+{
+        "movie_name" : "Daisies (Sedmikrasky)",
+        "production_year" : 2014,
+        "budget" : 15676
+}
+{
+        "movie_name" : "Set Me Free (Emporte-moi)",
+        "production_year" : 2004,
+        "budget" : 11182
+}
+{
+        "movie_name" : "Bourne Identity, The",
+        "production_year" : 2020,
+        "budget" : 19637
+}
+{
+        "movie_name" : "American Promise",
+        "production_year" : 2015,
+        "budget" : 19342
+}
+{
+        "movie_name" : "Little Manhattan",
+        "production_year" : 2014,
+        "budget" : 19751
+}
+{
+        "movie_name" : "Sleeping Car, The",
+        "production_year" : 2006,
+        "budget" : 12325
+}
+{
+        "movie_name" : "Take My Eyes (Te doy mis ojos)",
+        "production_year" : 2020,
+        "budget" : 18891
+}
+{
+        "movie_name" : "Phantom Pain",
+        "production_year" : 2007,
+        "budget" : 10510
+}
+Type "it" for more
+>  db.movies.find({$nor:[{"production_year":{$gt:2000}},{"budget":{$gt:10000}}]},{"movie_name":1, "production_year":1, "_id":0}).pretty()
+{ "movie_name" : "Angel Levine, The", "production_year" : 1993 }
+{ "movie_name" : "Daria: Is It Fall Yet?", "production_year" : 1990 }
+{ "movie_name" : "Lucky", "production_year" : 1997 }
+{ "movie_name" : "Born into Brothels", "production_year" : 1991 }
+{ "movie_name" : "Miracle on 34th Street", "production_year" : 1999 }
+{ "movie_name" : "In the Loop", "production_year" : 1998 }
+{ "movie_name" : "Noi the Albino (Nói albinói)", "production_year" : 1993 }
+{ "movie_name" : "Tempest, The", "production_year" : 1999 }
+{ "movie_name" : "Onion Movie, The", "production_year" : 1992 }
+{
+        "movie_name" : "Zombie (a.k.a. Zombie 2: The Dead Are Among Us) (Zombi 2)",
+        "production_year" : 1994
+}
+{ "movie_name" : "Star Trek: First Contact", "production_year" : 1999 }
+{
+        "movie_name" : "City Below, The (Unter dir die Stadt)",
+        "production_year" : 1995
+}
+{ "movie_name" : "Fire on the Mountain", "production_year" : 1990 }
+{ "movie_name" : "Ballistic: Ecks vs. Sever", "production_year" : 1999 }
+{ "movie_name" : "Blackmailed", "production_year" : 1995 }
+{ "movie_name" : "Bride Comes Home, The", "production_year" : 1995 }
+>   db.movies.find({$nor:[{"production_year":{$gt:2000}},{"budget":{$gt:10000}}]},{"movie_name":1, "production_year":1, "_id":0,"budget":1}).pretty()
+{
+        "movie_name" : "Angel Levine, The",
+        "production_year" : 1993,
+        "budget" : 9951
+}
+{
+        "movie_name" : "Daria: Is It Fall Yet?",
+        "production_year" : 1990,
+        "budget" : 9912
+}
+{ "movie_name" : "Lucky", "production_year" : 1997, "budget" : 9701 }
+{
+        "movie_name" : "Born into Brothels",
+        "production_year" : 1991,
+        "budget" : 9042
+}
+{
+        "movie_name" : "Miracle on 34th Street",
+        "production_year" : 1999,
+        "budget" : 9498
+}
+{ "movie_name" : "In the Loop", "production_year" : 1998, "budget" : 9828 }
+{
+        "movie_name" : "Noi the Albino (Nói albinói)",
+        "production_year" : 1993,
+        "budget" : 9084
+}
+{ "movie_name" : "Tempest, The", "production_year" : 1999, "budget" : 9268 }
+{
+        "movie_name" : "Onion Movie, The",
+        "production_year" : 1992,
+        "budget" : 9849
+}
+{
+        "movie_name" : "Zombie (a.k.a. Zombie 2: The Dead Are Among Us) (Zombi 2)",
+        "production_year" : 1994,
+        "budget" : 9292
+}
+{
+        "movie_name" : "Star Trek: First Contact",
+        "production_year" : 1999,
+        "budget" : 9253
+}
+{
+        "movie_name" : "City Below, The (Unter dir die Stadt)",
+        "production_year" : 1995,
+        "budget" : 9352
+}
+{
+        "movie_name" : "Fire on the Mountain",
+        "production_year" : 1990,
+        "budget" : 9103
+}
+{
+        "movie_name" : "Ballistic: Ecks vs. Sever",
+        "production_year" : 1999,
+        "budget" : 9425
+}
+{ "movie_name" : "Blackmailed", "production_year" : 1995, "budget" : 9010 }
+{
+        "movie_name" : "Bride Comes Home, The",
+        "production_year" : 1995,
+        "budget" : 9170
+}
+> db.movies.find({$or:[{$not:2000},{"budget":{$gt:10000}}]}).pretty()
+Error: error: {
+        "ok" : 0,
+        "errmsg" : "unknown top level operator: $not. If you have a field name that starts with a '$' symbol, consider using $getField or $setField.",
+        "code" : 2,
+        "codeName" : "BadValue"
+}
+>  db.movies.find({$or:[{"production_year":{$not:2000}},{"budget":{$gt:10000}}]}).pretty()
+Error: error: {
+        "ok" : 0,
+        "errmsg" : "$not needs a regex or a document",
+        "code" : 2,
+        "codeName" : "BadValue"
+}
+>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
